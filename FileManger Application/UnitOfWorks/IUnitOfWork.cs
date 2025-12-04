@@ -12,7 +12,7 @@ namespace FileManger_Application.UnitOfWorks
         Task BeginTransactionAsync();
         Task CommitAsync();
         Task RollBackAsync();
-        Task<int> CompleteAsync()
+        Task<int> CompleteAsync();
 
     }
 }
