@@ -1,15 +1,22 @@
 ﻿using FileManger_Application.Data;
 using FileManger_Application.Model;
 using FileManger_Application.Repositories;
+using FileManger_Application.ServiceContract;
+using FileManger_Application.Services;
 using FileManger_Application.UnitOfWorks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileManger_Application.Config
 {
     public static class ApplicationConfigurations
     {
+
         public static IServiceCollection ApplicationConfiguration(this IServiceCollection serviceCollection, IConfiguration configuration)
+
         {
+            serviceCollection.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("Default")));
+            serviceCollection.AddControllersWithViews();
             serviceCollection.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
@@ -23,6 +30,12 @@ namespace FileManger_Application.Config
 
             serviceCollection.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
+            serviceCollection.AddScoped<UserContract, UserService>();
+            serviceCollection.AddScoped<FileContract, FileService>();
+            serviceCollection.AddScoped<FolderContract, FolderService>();
+            serviceCollection.AddScoped<SharedContract, ShareService>();
+            serviceCollection.AddScoped<IStorageContract, StorageService>();
+
             return serviceCollection;
         }
     }
