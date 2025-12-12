@@ -35,7 +35,7 @@ namespace FileManger_Application.Config
             serviceCollection.AddScoped<FolderContract, FolderService>();
             serviceCollection.AddScoped<SharedContract, ShareService>();
             serviceCollection.AddScoped<IStorageContract, StorageService>();
-
+            serviceCollection.AddScoped<IApplicationSettingContract, ApplicationSettingService>();
             return serviceCollection;
         }
     }

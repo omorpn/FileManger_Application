@@ -1,17 +1,8 @@
-
-
 using FileManger_Application.Config;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
-
-
-
 builder.Services.ApplicationConfiguration(builder.Configuration);
 var app = builder.Build();
-
-
 
 app.UseRouting();
 app.UseAuthentication();
