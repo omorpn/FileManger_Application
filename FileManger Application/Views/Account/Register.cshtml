@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+
+< div class= "auth-card" >
+    < div class= "card shadow-sm border-0" >
+        < div class= "card-body p-4" >
+
+            < h3 class= "fw-bold text-center mb-3" > Create Your OutSave Account</h3>
+            <p class= "text-center text-muted mb-4" > It only takes a minute.</p>
+
+            <form method="post">
+
+                <div class= "mb-3" >
+                    < label > Full Name </ label >
+                    < input name = "FullName" class= "form-control" required />
+                </ div >
+
+                < div class= "mb-3" >
+                    < label > Email Address </ label >
+                    < input name = "Email" type = "email" class= "form-control" required />
+                </ div >
+
+                < div class= "mb-3" >
+                    < label > Password </ label >
+                    < input name = "Password" type = "password" class= "form-control" required />
+                </ div >
+
+                < button type = "submit" class= "btn btn-primary w-100 py-2" > Create Account </ button >
+
+                < p class= "text-center mt-3" >
+                    Already have an account? <a href="/Account/Login">Login now</a>
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+</div>

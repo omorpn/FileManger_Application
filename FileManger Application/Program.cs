@@ -1,5 +1,6 @@
 using FileManger_Application.Config;
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.ApplicationConfiguration(builder.Configuration);
 var app = builder.Build();
@@ -9,8 +10,12 @@ app.UseAuthentication();
 app.UseStaticFiles();
 app.UseAuthorization();
 
-app.MapControllers();
 
+app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+app.MapControllers();
 
 
 app.Run();

@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - VanFleek Fintech</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary: #6A0DFF;
+            --dark: #0A0A14;
+            --light-bg: #F2F2F7;
+        }
+
+        body {
+            background: var(--light-bg);
+            color: #333;
+        }
+
+        .navbar-fintech {
+            background: var(--dark);
+        }
+
+            .navbar-fintech a {
+                color: #fff !important;
+            }
+
+        .btn-primary {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #6A0DFF, #9C4DFF);
+            color: #fff;
+        }
+
+        footer {
+            background: var(--dark);
+            color: #aaa;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-fintech fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">VanfleekPay</a>
+
+            <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#nav">
+                ☰
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav">
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Account/Login">Login</a></li>
+
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary px-4" href="/Account/Register">Create Account</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main style="margin-top: 80px;">
+        @RenderBody()
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year OutSave. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

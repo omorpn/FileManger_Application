@@ -1,0 +1,16 @@
+﻿:root {
+    --primary: #0076FF;
+    --accent: #6A0DFF;
+    --dark: #0A0A14;
+    --bg-light: #F4F6FB;
+}
+
+.auth-card {
+    max-width: 460px;
+    margin: 80px auto;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}

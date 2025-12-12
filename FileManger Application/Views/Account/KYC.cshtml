@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "KYC Verification";
+}
+
+<div class="auth-card">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            <h3 class="fw-bold text-center mb-3">Verify Your Identity</h3>
+            <p class="text-center text-muted mb-4">
+                Complete KYC to unlock full access to OutSave services.
+            </p>
+
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label>Full Name</label>
+                    <input name="FullName" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Date of Birth</label>
+                    <input name="DOB" type="date" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Government ID (Front)</label>
+                    <input name="IDFront" type="file" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Government ID (Back)</label>
+                    <input name="IDBack" type="file" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Selfie Photo</label>
+                    <input name="Selfie" type="file" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2">
+                    Submit Verification
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
