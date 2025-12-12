@@ -8,7 +8,7 @@ namespace FileManger_Application.Config
 {
     public static class ApplicationConfigurations
     {
-        public static IServiceCollection AddApplicationConfiguration(this IServiceCollection serviceCollection)
+        public static IServiceCollection ApplicationConfiguration(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
