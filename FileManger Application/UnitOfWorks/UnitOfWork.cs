@@ -9,13 +9,14 @@ namespace FileManger_Application.UnitOfWorks
     {
         private readonly ApplicationDbContext _context;
         private IDbContextTransaction _transaction;
-        public IGenericRepository<ApplicationUser> Users { get; }
 
         public IGenericRepository<Files> Files { get; }
 
         public IGenericRepository<Foldder> Folder { get; }
 
         public IGenericRepository<SharedItem> SharedItem { get; }
+        public IGenericRepository<ApplicationSetting> ApplicationSetting { get; }
+        public IGenericRepository<ApplicationUser> Users { get; }
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _context = dbContext;
@@ -23,6 +24,7 @@ namespace FileManger_Application.UnitOfWorks
             Files = new GenericRepository<Files>(_context);
             Folder = new GenericRepository<Foldder>(_context);
             SharedItem = new GenericRepository<SharedItem>(_context);
+            ApplicationSetting = new GenericRepository<ApplicationSetting>(_context);
         }
 
         public async Task BeginTransactionAsync()

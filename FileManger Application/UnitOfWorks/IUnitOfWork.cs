@@ -5,10 +5,11 @@ namespace FileManger_Application.UnitOfWorks
 {
     public interface IUnitOfWork
     {
-        IGenericRepository<ApplicationUser> Users { get; }
+        IGenericRepository<ApplicationSetting> ApplicationSetting { get; }
         IGenericRepository<Files> Files { get; }
         IGenericRepository<Foldder> Folder { get; }
         IGenericRepository<SharedItem> SharedItem { get; }
+        IGenericRepository<ApplicationUser> Users { get; }
         Task BeginTransactionAsync();
         Task CommitAsync();
         Task RollBackAsync();

@@ -10,7 +10,8 @@ namespace FileManger_Application.Model
         [Required, StringLength(50)]
         public string? Path { get; set; }
         [Required, StringLength(50)]
-        public Decimal? Size { get; set; }
+
+        public long Size { get; set; }
         [Required, StringLength(50)]
         public string? Type { get; set; }
         [Required, StringLength(50)]

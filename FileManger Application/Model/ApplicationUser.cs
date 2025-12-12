@@ -5,12 +5,16 @@ namespace FileManger_Application.Model
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
+
         [Required(ErrorMessage = "{0} cant be null or Empty"), StringLength(50), Display(Name = "First Name")]
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
         [Required(ErrorMessage = "{0} cant be null or Empty"), StringLength(50), Display(Name = "Last Name")]
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
     }
+
 }
