@@ -37,6 +37,7 @@ namespace FileManger_Application.DTOs.UserDto
             {
                 FirstName = Normalization.NormalizeName(request.FirstName),
                 Email = Normalization.NormalizeEmail(request.Email),
+                UserName = Normalization.NormalizeEmail(request.Email),
                 LastName = Normalization.NormalizeName(request.LastName),
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,

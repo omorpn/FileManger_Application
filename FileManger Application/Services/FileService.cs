@@ -99,7 +99,7 @@ namespace FileManger_Application.Services
             return Result<FileResponse>.Ok(result.ToFileResponse());
         }
 
-        public async Task<Result<List<FileResponse>>> Search(string search, int page, int pageSize)
+        public async Task<Result<List<FileResponse>>> SearchAsync(string search, int page, int pageSize)
         {
             var query = _unitOfWork.Files.Query();
             DateTime.TryParse(search, out DateTime s);
@@ -165,6 +165,25 @@ namespace FileManger_Application.Services
             var result = await _unitOfWork.CompleteAsync();
             return Result<bool>.Ok(result > 0);
 
+        }
+
+        public Task<Result<List<FileResponse>>> GetAllFilesAsync(int page, int pageSize)
+        {
+            var query = _unitOfWork.Files.Query();
+            var response = query.Order().Skip((page - 1) * pageSize).Take(pageSize).Select(file => file.ToFileResponse());
+            return Task.FromResult(Result<List<FileResponse>>.Ok(response.ToList()));
+        }
+
+        public async Task<Result<List<FileResponse>>> GetAllFilesAsync()
+        {
+            var files = await _unitOfWork.Files.GetAllAsync();
+            return Result<List<FileResponse>>.Ok(files.Select(file => file.ToFileResponse()).ToList());
+        }
+
+        public async Task<Result<List<FileResponse>>> GetFileByUserIdAsync(Guid userId)
+        {
+            var files = await _unitOfWork.Files.GetAllAsync();
+            return Result<List<FileResponse>>.Ok(files.Where(file => file.OwnerId == userId).Select(file => file.ToFileResponse()).ToList());
         }
     }
 }

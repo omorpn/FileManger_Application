@@ -46,7 +46,9 @@ namespace FileManger_Application.ServiceContract
         /// <param name="pageSize">The maximum number of results to include in a single page. Must be greater than 0.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with a list of
         /// FileResponse items for the specified page. The list will be empty if no files match the search criteria.</returns>
-        Task<Result<List<FileResponse>>> Search(string search, int page, int pageSize);
-
+        Task<Result<List<FileResponse>>> SearchAsync(string search, int page, int pageSize);
+        Task<Result<List<FileResponse>>> GetAllFilesAsync(int page, int pageSize);
+        Task<Result<List<FileResponse>>> GetAllFilesAsync();
+        Task<Result<List<FileResponse>>> GetFileByUserIdAsync(Guid userId);
     }
 }

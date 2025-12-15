@@ -55,6 +55,12 @@ namespace FileManger_Application.ServiceContract
         /// UserResponse items matching the search criteria for the specified page. The list will be empty if no users
         /// match the criteria.</returns>
         Task<Result<List<UserResponse>>> Search(string search, int page, int pageSize);
+        Task<Result<UserResponse>> LoginAsync(string username, string password, bool rememberMe);
+        Task<Result<bool>> LogoutAsync();
+        Task<Result<string>> ForgottenPasswordAsync(string email);
+        Task<Result<UserResponse>> GetUserByEmail(string userId);
+        Task<Result<UserResponse>> ResetPasswordAsync(string email, string newPassword, string token);
+
 
     }
 }

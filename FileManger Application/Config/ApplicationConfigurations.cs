@@ -4,7 +4,9 @@ using FileManger_Application.Repositories;
 using FileManger_Application.ServiceContract;
 using FileManger_Application.Services;
 using FileManger_Application.UnitOfWorks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace FileManger_Application.Config
@@ -16,7 +18,17 @@ namespace FileManger_Application.Config
 
         {
             serviceCollection.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("Default")));
-            serviceCollection.AddControllersWithViews();
+            serviceCollection.AddControllersWithViews(opt =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            });
+            serviceCollection.AddAuthorization(opt =>
+            {
+                opt.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
+
+
             serviceCollection.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
