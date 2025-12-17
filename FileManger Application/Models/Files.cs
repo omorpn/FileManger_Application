@@ -7,7 +7,7 @@ namespace FileManger_Application.Model
         public Guid Id { get; set; }
         [Required, StringLength(50)]
         public string? FileName { get; set; }
-        [Required, StringLength(50)]
+        [Required, StringLength(200)]
         public string? Path { get; set; }
         [Required, StringLength(50)]
 

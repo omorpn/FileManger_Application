@@ -11,6 +11,40 @@
     }
 }
 
+@functions{
+    string FormatFileSize(decimal? size)
+    {
+        if(size == null || size.Value < 0)
+        {
+            return $"{0}B";
+        }
+        string[] units = { "B", "KB", "MB", "GB", "TB" };
+        int index = 0;
+
+        decimal value = size.Value;
+
+        while(value >= 1024 && index <units.Length - 1)
+        {
+            value /= 1024;
+            index++;
+        }
+        return $"{value:F2}{units[index]}";
+    }
+}
+<!-- Toast container -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="appToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto" id="toastTitle">Notification</strong>
+            <small class="text-muted">now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body" id="toastBody">
+            Message goes here
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
 
     <!-- PAGE HEADER -->
@@ -29,6 +63,17 @@
             <i class="bi bi-arrow-repeat me-1"></i>
             Refresh
         </button>
+    </div>
+    @* File upload *@
+    <div class="mb-3 card center p-3 w-75 mx-auto">
+        <form action="/" id="formupload" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <input type="file"  name= "file" class="form-control" multiple id="formFile"  required/>
+                
+
+        <button class="btn btn-primary">Upload</button>
+            </div>
+        </form>
     </div>
 
     <!-- FILTERS -->
@@ -84,7 +129,11 @@
                     <thead class="table-light">
                         <tr>
                             <th>File</th>
-                            <th>Owner</th>
+                            @if (User.IsInRole("ADMIN"))
+                            {
+                                <th>Owner</th>
+                            }
+                           
                             <th>Type</th>
                             <th>Size</th>
                             <th>Uploaded</th>
@@ -94,10 +143,152 @@
                     </thead>
 
                     <tbody>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <!-- File -->
+                                    <td>
+                                        <i class="bi bi-file-earmark me-2 text-primary"></i>
+                                        <span class="fw-medium">@item.FileName</span>
+                                    </td>
+                                        @if (User.IsInRole("ADMIN"))
+                                        {
+                                        <!-- Owner -->
+                                        <td class="text-muted">
+                                            @item.OwnerId.ToString().Substring(0, 6)
+                                        </td>
+                                            
+                                        }
+                                  
 
-                        <tr>
-                            <td>
-                                <i class="bi bi-file-earmark-text me-1 text-primary"></i>
-                                contract.pdf
-                            </td>
-                            <td>john@example.com</td>
+                                    <!-- Type -->
+                                    <td>
+                                        <span class="text-uppercase">@item.Type</span>
+                                    </td>
+
+                                    <!-- Size -->
+                                    <td>
+                                        @FormatFileSize(item.Size)
+                                    </td>
+
+                                    <!-- Uploaded -->
+                                    <td>
+                                        @item.CreatedAt.ToString("dd MMM yyyy")
+                                    </td>
+
+                                    <!-- Status -->
+                                    <td>
+                                        @if (true)
+                                        {
+                                            <span class="badge rounded-pill bg-danger-subtle text-danger">
+                                                Deleted
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-success-subtle text-success">
+                                                Active
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <!-- Actions -->
+                                    <td class="text-end">
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-action="Download"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-outline-primary">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+
+                                            <a asp-action="Details"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-outline-secondary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+
+                                            @if (User.IsInRole("ADMIN"))
+                                            {
+                                                <a asp-action="Delete"
+                                                   asp-route-id="@item.Id"
+                                                   class="btn btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <i class="bi bi-folder-x fs-3 d-block mb-2"></i>
+                                    No files available
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                    
+                    </table>
+</div>
+</div>
+</div>
+<script>
+            function showToast(message, title = "Notification") {
+            const toastEl = document.getElementById("appToast");
+            document.getElementById("toastTitle").innerText = title;
+            document.getElementById("toastBody").innerText = message;
+
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 3000
+            });
+
+            toast.show();
+        }
+
+
+
+    
+    const formEl = document.querySelector("#formupload");
+    formEl.addEventListener("submit",event=>{
+        event.preventDefault();
+        const formData = new FormData(formEl);
+                  upload(formData);
+        for(const [key,value] of formData.entries()){
+            console.log(key,value);
+        }});
+
+         async function upload(formData){
+        try{
+
+        let res = await fetch("/files/upload",{
+        method:"POST",
+        body:formData
+        });
+             const text = await res.text(); // ✅ always safe
+
+            let data;
+            try {
+                data = JSON.parse(text); // try JSON
+            } catch {
+                data = { message: text }; // fallback for .NET errors
+            }
+
+        if(!res.ok){
+                showToast(data.message||"upload failed","Error");
+        }
+                       showToast(data.message||"upload completed successfully","Update");
+                   setTimeout(()=>{window.location.reload()},3000);
+        }catch(err){
+
+        alert(err.message);
+        }
+    }
+  
+</script>

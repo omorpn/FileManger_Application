@@ -12,6 +12,7 @@ namespace FileManger_Application.Data
         public DbSet<Foldder> Folders { get; set; }
         public DbSet<Files> Files { get; set; }
         public DbSet<SharedItem> SharedItems { get; set; }
+        public DbSet<ApplicationSetting> Settings { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

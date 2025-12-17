@@ -11,22 +11,25 @@ namespace FileManger_Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IStorageContract _storageContract;
-        public FileService(IUnitOfWork unitOfWork, IStorageContract storageContract)
+        private readonly ILogger<FileService> _logger;
+        public FileService(IUnitOfWork unitOfWork, IStorageContract storageContract, ILogger<FileService> logger)
         {
             _unitOfWork = unitOfWork;
             _storageContract = storageContract;
+            _logger = logger;
         }
         public async Task<Result<bool>> AddFile(AddFileRequest request, FileType type)
         {
+
             if (request == null)
             {
                 return Result<bool>.Fail(" Invalid file details.", ErrorType.Validation);
             }
-            if (request?.File == null || request.File.Length == 0)
+            if (request?.File == null || request.File.Count == 0)
             {
                 return Result<bool>.Fail(" Invalid file details.", ErrorType.Validation);
             }
-            if (await _unitOfWork.Folder.GetByIdAsync(request.FolderId) == null)
+            if (string.IsNullOrWhiteSpace(request.FolderId.ToString()) && await _unitOfWork.Folder.GetByIdAsync(request.FolderId) == null)
             {
                 return Result<bool>.Fail(" Invalid folder ID.", ErrorType.Validation);
             }
@@ -34,49 +37,57 @@ namespace FileManger_Application.Services
             {
                 return Result<bool>.Fail(" Invalid User ID.", ErrorType.Validation);
             }
-            Files newFile = new()
-            {
-                FolderId = request.FolderId,
-                FileName = request.File.FileName,
-                OwnerId = request.OwnerId,
-                Type = request.File.ContentType,
-                Size = request.File.Length,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-
-
-            };
-
+            await _unitOfWork.BeginTransactionAsync();
+            var filePath = new List<string>();
             try
             {
-                await _unitOfWork.Files.AddAsync(newFile);
 
-                Result<string> savedFile = type switch
+                foreach (var file in request.File)
                 {
-                    FileType.Private => await _storageContract.SavePrivateFileAsync(request.File),
-                    FileType.Public => await _storageContract.SavePublicFileAsync(request.File),
-                    _ => Result<string>.Fail("Invalid file type", ErrorType.Server)
-                };
-                if (!savedFile.Success || savedFile.Data == null)
-                {
-                    await _unitOfWork.RollBackAsync();
-                    return Result<bool>.Fail(savedFile.Message, ErrorType.Server);
+                    Files newFile = new()
+                    {
+                        FolderId = request.FolderId,
+                        FileName = file.FileName,
+                        OwnerId = request.OwnerId,
+                        Type = file.ContentType,
+                        Size = file.Length,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                    };
+
+                    await _unitOfWork.Files.AddAsync(newFile);
+                    Result<string> savedFile = type switch
+                    {
+                        FileType.Private => await _storageContract.SavePrivateFileAsync(file),
+                        FileType.Public => await _storageContract.SavePublicFileAsync(file),
+                        _ => Result<string>.Fail("Invalid file type", ErrorType.Server)
+                    };
+
+                    if (!savedFile.Success || savedFile.Data == null)
+                    {
+                        return Result<bool>.Fail(savedFile.Message, ErrorType.Server);
+                    }
+                    filePath.Add(savedFile.Data);
+
+                    newFile.Path = savedFile.Data;
                 }
+                var result = await _unitOfWork.CommitAsync();
+                _logger.LogInformation(result.ToString());
 
-
-                newFile.Path = savedFile.Data;
-                _unitOfWork.Files.Update(newFile);
-
-                await _unitOfWork.CommitAsync();
                 return Result<bool>.Ok(true);
             }
             catch
             {
-
+                foreach (var file in filePath)
+                {
+                    File.Delete(file);
+                }
                 await _unitOfWork.RollBackAsync();
                 return Result<bool>.Fail("Somthing went while adding file", ErrorType.Server);
 
             }
+
+
         }
 
 
@@ -183,7 +194,7 @@ namespace FileManger_Application.Services
         public async Task<Result<List<FileResponse>>> GetFileByUserIdAsync(Guid userId)
         {
             var files = await _unitOfWork.Files.GetAllAsync();
-            return Result<List<FileResponse>>.Ok(files.Where(file => file.OwnerId == userId).Select(file => file.ToFileResponse()).ToList());
+            return Result<List<FileResponse>>.Ok(files.Where(file => file.OwnerId == userId).OrderByDescending(u => u.CreatedAt).Select(file => file.ToFileResponse()).ToList());
         }
     }
 }

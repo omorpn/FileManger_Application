@@ -16,6 +16,7 @@ namespace FileManger_Application.DTOs.FilesDto
         public string? Type { get; set; }
         [Required, StringLength(50)]
         public Guid FolderId { get; set; }
+        public bool IsDeleted { get; set; }
         [Required, StringLength(50)]
         public Guid OwnerId { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -32,7 +33,9 @@ namespace FileManger_Application.DTOs.FilesDto
                 Path = file.Path,
                 Size = file.Size,
                 Type = file.Type,
+                OwnerId = file.OwnerId,
                 FolderId = file.FolderId,
+                IsDeleted = false,
                 CreatedAt = file.CreatedAt,
                 UpdatedAt = file.UpdatedAt,
 

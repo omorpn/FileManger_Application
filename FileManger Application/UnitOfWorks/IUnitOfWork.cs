@@ -11,7 +11,7 @@ namespace FileManger_Application.UnitOfWorks
         IGenericRepository<SharedItem> SharedItem { get; }
         IGenericRepository<ApplicationUser> Users { get; }
         Task BeginTransactionAsync();
-        Task CommitAsync();
+        Task<int> CommitAsync();
         Task RollBackAsync();
         Task<int> CompleteAsync();
 

@@ -36,10 +36,12 @@ namespace FileManger_Application.UnitOfWorks
             _transaction = await _context.Database.BeginTransactionAsync();
         }
 
-        public async Task CommitAsync()
+        public async Task<int> CommitAsync()
         {
+            var result = await _context.SaveChangesAsync();
             _transaction.Commit();
             await _context.DisposeAsync();
+            return result;
         }
 
         public async Task RollBackAsync()

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lenovo ThinkPad T490 – Trusted Business Laptop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lenovo ThinkPad T490 – Core i5, 16GB RAM, 512GB SSD, 14'' FHD touchscreen. Trusted business laptop for work, school and productivity." />
+  <style>
+    :root {
+      --lenovo-red: #e2231a;
+      --lenovo-red-dark: #c91c14;
+      --bg-light: #f5f5f5;
+      --bg-soft: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-muted: #666666;
+      --border-soft: #e6e6e6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #ffffff;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout */
+
+    .page-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
+    section {
+      padding: 24px 16px;
+    }
+
+    @media (min-width: 480px) {
+      section {
+        padding: 32px 24px;
+      }
+    }
+
+    /* Header / Hero */
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #ffffff;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-badge {
+      background: var(--lenovo-red);
+      color: #ffffff;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .top-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      background: linear-gradient(160deg, #ffffff 0%, #fafafa 35%, #f1f1f1 100%);
+      text-align: center;
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(226, 35, 26, 0.06);
+      color: var(--lenovo-red);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-image-card {
+      margin: 16px auto 20px;
+      max-width: 320px;
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      padding: 12px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-image-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      background: radial-gradient(circle at 10% 0%, #333 0, #000 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f5f5;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span strong {
+      color: var(--text-dark);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--lenovo-red);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background 0.18s ease, transform 0.1s ease;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:active {
+      background: var(--lenovo-red-dark);
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: #ffffff;
+      color: var(--lenovo-red);
+      font-weight: 500;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(226, 35, 26, 0.3);
+      cursor: pointer;
+      margin-top: 2px;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Trust strip */
+
+    .trust-strip {
+      background: var(--bg-light);
+    }
+
+    .trust-strip h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .trust-pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .trust-pill {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .trust-pill span.icon {
+      font-size: 13px;
+    }
+
+    /* Content sections */
+
+    .section-title {
+      font-size: 17px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Specs card */
+
+    .card {
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-soft);
+      padding: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .card-title {
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .specs-list {
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .specs-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border-soft);
+    }
+
+    .specs-list li:last-child {
+      border-bottom: none;
+    }
+
+    .specs-label {
+      font-weight: 500;
+      min-width: 90px;
+    }
+
+    .specs-value {
+      color: var(--text-muted);
+    }
+
+    /* Benefit cards */
+
+    .benefit-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .benefit-card {
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      padding: 10px 12px;
+      background: #ffffff;
+    }
+
+    .benefit-card h3 {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .benefit-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Payment / Delivery */
+
+    .info-block {
+      border-left: 3px solid var(--lenovo-red);
+      padding-left: 12px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .info-block strong {
+      color: var(--text-dark);
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .check-list span.icon {
+      font-size: 13px;
+      margin-top: 1px;
+    }
+
+    /* FAQ */
+
+    .faq-item {
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #ffffff;
+    }
+
+    .faq-question {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .faq-answer {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Final CTA */
+
+    .final-cta {
+      background: var(--lenovo-red);
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .final-cta p {
+      font-size: 13px;
+      margin-bottom: 16px;
+      color: #ffeceb;
+    }
+
+    .btn-cta-light {
+      display: inline-block;
+      background: #ffffff;
+      color: var(--lenovo-red);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.12s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-cta-light:hover,
+    .btn-cta-light:active {
+      transform: translateY(1px);
+    }
+
+    .final-cta-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #ffe1de;
+    }
+
+    /* Footer */
+
+    footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 16px 10px 24px;
+      background: #fafafa;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="logo">
+        <span class="logo-badge">Lenovo</span>
+      </div>
+      <div class="top-badge">ThinkPad Series · Trusted Worldwide</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-tag">
+        <span>●</span> Business Laptop
+      </div>
+      <h1>Lenovo ThinkPad T490</h1>
+      <p class="hero-sub">Trusted business laptop with Core i5, 16GB RAM, 512GB SSD & 14&quot; FHD touchscreen.</p>
+
+      <div class="hero-image-card">
+        <!-- Replace this with a real product image if you have one -->
+        <div class="hero-image-placeholder">
+          ThinkPad T490
+        </div>
+        <div class="hero-meta">
+          <span><strong>14&quot; FHD</strong> Display</span>
+          <span><strong>16GB</strong> RAM</span>
+          <span><strong>512GB</strong> SSD</span>
+        </div>
+      </div>
+
+      <a href="https://wa.me/234XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20order%20the%20Lenovo%20ThinkPad%20T490"
+         class="btn-primary">
+        Order on WhatsApp
+      </a>
+      <div>
+        <button class="btn-secondary" onclick="document.getElementById('specs').scrollIntoView({behavior:'smooth'})">
+          View full specs
+        </button>
+      </div>
+      <p class="hero-note">Limited stock available. Inspection allowed before confirmation.</p>
+    </section>
+
+    <!-- Trust Strip -->
+    <section class="trust-strip">
+      <h2>Why buyers trust this laptop</h2>
+      <p class="section-sub">Built for professional use, tested and prepared before delivery.</p>
+      <div class="trust-pill-wrap">
+        <div class="trust-pill">
+          <span class="icon">✅</span> Original Lenovo ThinkPad
+        </div>
+        <div class="trust-pill">
+          <span class="icon">✅</span> Tested before shipping
+        </div>
+        <div class="trust-pill">
+          <span class="icon">✅</span> Inspection allowed
+        </div>
+        <div class="trust-pill">
+          <span class="icon">✅</span> Windows 11 installed
+        </div>
+        <div class="trust-pill">
+          <span class="icon">✅</span> Nationwide delivery
+        </div>
+        <div class="trust-pill">
+          <span class="icon">✅</span> After-sales support
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section>
+      <h2 class="section-title">Designed for serious productivity</h2>
+      <p class="section-sub">
+        The ThinkPad T490 is a business-grade laptop used by professionals worldwide. It delivers stable performance for office work,
+        online classes, programming and everyday multitasking without slowing you down.
+      </p>
+    </section>
+
+    <!-- Specs -->
+    <section id="specs">
+      <div class="card">
+        <div class="card-title">Key Specifications</div>
+        <ul class="specs-list">
+          <li>
+            <span class="specs-label">Display</span>
+            <span class="specs-value">14&quot; Full HD (1920×1080), crisp and comfortable for long use</span>
+          </li>
+          <li>
+            <span class="specs-label">Touchscreen</span>
+            <span class="specs-value">Yes – smooth and responsive navigation</span>
+          </li>
+          <li>
+            <span class="specs-label">Processor</span>
+            <span class="specs-value">Intel Core i5-8365U (8th Gen)</span>
+          </li>
+          <li>
+            <span class="specs-label">Memory</span>
+            <span class="specs-value">16GB DDR4 RAM for seamless multitasking</span>
+          </li>
+          <li>
+            <span class="specs-label">Storage</span>
+            <span class="specs-value">512GB SSD – fast boot and quick app loading</span>
+          </li>
+          <li>
+            <span class="specs-label">Battery</span>
+            <span class="specs-value">50Wh lithium battery for mobile work</span>
+          </li>
+          <li>
+            <span class="specs-label">Ports</span>
+            <span class="specs-value">HDMI, Thunderbolt, USB, audio jack</span>
+          </li>
+          <li>
+            <span class="specs-label">Wireless</span>
+            <span class="specs-value">WiFi, Bluetooth</span>
+          </li>
+          <li>
+            <span class="specs-label">OS</span>
+            <span class="specs-value">Windows 11 installed and ready to use</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Performance Benefits -->
+    <section>
+      <h2 class="section-title">What you can do with it</h2>
+      <p class="section-sub">Built to handle real work, not just light browsing.</p>
+
+      <div class="benefit-list">
+        <div class="benefit-card">
+          <h3>Fast and responsive</h3>
+          <p>16GB RAM + SSD means smooth multitasking with office apps, browsers, Zoom, coding tools and more.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Comfortable for long hours</h3>
+          <p>Legendary ThinkPad keyboard and 14&quot; FHD display make typing and reading more comfortable.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Business-grade durability</h3>
+          <p>ThinkPads are known for strong build quality, making them a smart long-term investment.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment & Delivery -->
+    <section>
+      <h2 class="section-title">Payment & Delivery (Simple & Clear)</h2>
+      <p class="section-sub">
+        We keep the process honest and transparent so you can buy with confidence.
+      </p>
+
+      <div class="info-block">
+        <p>
+          <strong>For high-value devices like laptops,</strong> delivery is arranged after order confirmation.
+          You are allowed to inspect the laptop on arrival before final confirmation.
+        </p>
+      </div>
+
+      <ul class="check-list">
+        <li>
+          <span class="icon">✅</span>
+          <span>Inspection allowed on arrival before you confirm.</span>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <span>Laptop is fully tested before dispatch.</span>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <span>Clear communication of delivery time and terms.</span>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <span>Nationwide delivery available.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">Is this laptop fast enough for work and school?</div>
+        <div class="faq-answer">
+          Yes. The Core i5 + 16GB RAM + SSD combo is more than enough for office apps, browsing, online meetings, basic design and programming.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Does it come with Windows installed?</div>
+        <div class="faq-answer">
+          Yes. Windows 11 is installed and ready to use. You can start working as soon as you power it on.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I inspect the laptop before confirming?</div>
+        <div class="faq-answer">
+          Yes. Inspection on arrival is allowed so you can confirm it matches the description.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do you deliver outside my city?</div>
+        <div class="faq-answer">
+          Yes. We offer nationwide delivery. Delivery details and cost will be shared clearly before we dispatch.
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <h2>Ready to upgrade your productivity?</h2>
+      <p>Get a trusted Lenovo ThinkPad T490 built for serious work, online classes and business use.</p>
+
+      <a href="https://wa.me/234XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20order%20the%20Lenovo%20ThinkPad%20T490"
+         class="btn-cta-light">
+        Chat Now to Order on WhatsApp
+      </a>
+
+      <div class="final-cta-note">
+        Limited units available. Once sold out, restock is not guaranteed.
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      Lenovo® and ThinkPad® are trademarks of Lenovo. This page is for product promotion and information only.
+    </footer>
+
+  </div>
+</body>
+</html>
